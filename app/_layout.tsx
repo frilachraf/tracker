@@ -8,6 +8,18 @@ function _layout() {
     <Stack
       screenOptions={{headerShown: false}}
     >
+      <Stack.Screen 
+        name='modal'
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen 
+        name='(modals)/SupplierAddModal'
+        options={{
+          presentation: 'modal',
+        }}
+      />
     </Stack>
   )
 }

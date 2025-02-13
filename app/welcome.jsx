@@ -11,7 +11,8 @@ import { Link, useRouter } from 'expo-router'
 function welcome() {
     const router  = useRouter();
     const getStarted = () =>{
-        router.push('/(auth)/register')
+        // router.push('/(auth)/register')
+        router.push('/(tabs)/suppliers')
     }
     return (
     <ScreenWrapper>
@@ -28,6 +29,7 @@ function welcome() {
                 <Animated.Image 
                     entering={FadeIn.duration(2000)}
                     source={require('../assets/images/welcome.png')}
+                    style={{width:"100%"}}
                     // source={{uri:'../assets/images/welcome.png'}}
                 />
             </View>

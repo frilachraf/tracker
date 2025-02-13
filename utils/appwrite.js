@@ -74,21 +74,28 @@ client
   }
 
   export async function getCurrentUser() {
-    try{
-      const currentAccount = await account.get();
-      // if(!currentAccount) throw Error;
-      // const currentUser = await databases.listDocuments(
-      //   appwriteConfig.databaseId,
-      //   appwriteConfig.userCollectionId,
-      //   [Query.equal('accountId',currentAccount.$id)]
-      // )
-      // if(!currentUser) throw Error;
-      // // console.log('user from the context',currentUser.documents[0])
-      // return currentUser.documents[0]
-      return currentAccount
-    }
-    catch(error){
-      console.log(error)
+    // try{
+    //   const currentAccount = await account.get();
+    //   if(!currentAccount) throw Error;
+    //   const currentUser = await databases.listDocuments(
+    //     appwriteConfig.databaseId,
+    //     appwriteConfig.userCollectionId,
+    //     [Query.equal('accountId',currentAccount.$id)]
+    //   )
+    //   if(!currentUser) throw Error;
+    //   // console.log('user from the context',currentUser.documents[0])
+    //   return currentUser.documents[0]
+    //   return currentAccount
+    // }
+    // catch(error){
+    //   console.log(error)
+    // }
+    try {
+      const user = await account.get();
+      return user; // Returns user details if authenticated
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null; // Return null if no user is logged in
     }
   }
 
@@ -105,18 +112,21 @@ client
       throw new Error
     }
   }
-  export const searchSupplier = async () => {
-    try{
-      const suppliers  = await databases.listDocuments(
+  export const searchSupplier = async (query = []) => {
+    try {
+      const suppliers = await databases.listDocuments(
         appwriteConfig.databaseId,
-        appwriteConfig.supplierCollectionId
-      )
-      return suppliers.documents
+        appwriteConfig.supplierCollectionId,
+        query
+      );
+  
+      return suppliers.documents;
+    } catch (error) {
+      console.error('Error fetching suppliers:', error);
+      throw new Error('Failed to fetch suppliers');
     }
-    catch(error){
-      throw new Error
-    }
-  }
+  };
+
   
  export  async function logoutUser() {
     try {
@@ -128,3 +138,18 @@ client
       return false;
     }
   }
+
+  export const addSupplier = async (product) => {
+    try {
+      const response = await databases.createDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.supplierCollectionId,
+        ID.unique(),
+        product
+      );
+      return response;
+    } catch (error) {
+      console.error('Error adding product:', error);
+      throw error;
+    }
+  };
