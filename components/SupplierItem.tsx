@@ -10,11 +10,11 @@ const SupplierItem = ({name="Johne Doe",phone='0612345678',id, index=0}:{name?:s
     const isPressed = index == 2 ? true: false
     const [hovered,setHovered] = useState(false)
     return (
-    <Animated.View onPointerEnter={()=>setHovered(true)} onPointerUp={()=>setHovered(false)}
+    <Animated.View onPointerEnter={()=>setHovered(true)} onPointerLeave={()=>setHovered(false)}
         
         entering={FadeIn.duration(300).delay(index*50)} 
         exiting={FadeIn.duration(300)}
-        style={[styles.container, {backgroundColor: hovered ? colors?.primary : ''} ]}
+        style={[styles.container, {backgroundColor: hovered ? colors?.neutral800 : ''} ]}
         className={'group'}
         >
       <View style={{flexDirection:'row',
@@ -30,12 +30,14 @@ const SupplierItem = ({name="Johne Doe",phone='0612345678',id, index=0}:{name?:s
             </View>
       </View>
       <View style={{flexDirection:'row',gap:10}}>
-        {/* <TouchableOpacity className='group-focus:inline hidden'>
-            <Icons.Plus size={22} color={colors?.neutral400}/>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity className='group-focus:inline hidden'>
-            <Icons.CaretRight size={22} color={colors?.neutral400}/>
-        </TouchableOpacity> */}
+        {hovered && <>
+            <TouchableOpacity className='group-focus:inline hidden'>
+                <Icons.Plus size={22} color={colors?.neutral400}/>
+            </TouchableOpacity> 
+            <TouchableOpacity className='group-focus:inline hidden'>
+                <Icons.CaretRight size={22} color={colors?.neutral400}/>
+            </TouchableOpacity>
+        </>}
       </View>
     </Animated.View>
   )

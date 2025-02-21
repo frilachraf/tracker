@@ -44,7 +44,9 @@ client
       // setLoggedInUser(await account.get());
     }
     catch (error) {
-      throw new Error(error)
+      // throw new Error(error)
+      console.error('Login', error);
+
     }
   }
 
@@ -69,7 +71,9 @@ client
       )
     }
     catch (error) {
-      throw new Error(error)
+      console.error('sign up ', error);
+
+      // throw new Error(error)
     }
   }
 
@@ -109,7 +113,8 @@ client
       return suppliers.documents
     }
     catch(error){
-      throw new Error
+      console.error('Error fetching suppliers:', error);
+      // throw new Error
     }
   }
   export const searchSupplier = async (query = []) => {
@@ -123,7 +128,7 @@ client
       return suppliers.documents;
     } catch (error) {
       console.error('Error fetching suppliers:', error);
-      throw new Error('Failed to fetch suppliers');
+      // throw new Error('Failed to fetch suppliers');
     }
   };
 
@@ -150,6 +155,6 @@ client
       return response;
     } catch (error) {
       console.error('Error adding product:', error);
-      throw error;
+      // throw error;
     }
   };

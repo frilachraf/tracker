@@ -20,6 +20,12 @@ function _layout() {
           presentation: 'modal',
         }}
       />
+      <Stack.Screen 
+        name='(modals)/PacksAddModal'
+        options={{
+          presentation: 'modal',
+        }}
+      />
     </Stack>
   )
 }
